@@ -1,0 +1,14 @@
+{
+  "name": "score_board",
+  "version": "1.0.0",
+  "description": "score board for improv",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Antoine Billy",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^1.7.9"
+  }
+}
