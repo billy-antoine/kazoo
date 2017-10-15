@@ -42,7 +42,7 @@ function createSettingWindow () {
 
   // and load the index.html of the app.
   settingWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
+    pathname: path.join(__dirname, 'settings.html'),
     protocol: 'file:',
     slashes: true
   }))
