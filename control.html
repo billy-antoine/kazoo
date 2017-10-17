@@ -74,11 +74,11 @@
                             <fieldset>
                                 <legend><img  src="img/carton.png" height="35px" alt=""> Carton de thème</legend>
 
-                                <div class="form-group col-md-12">
+                                <div class="form-group col-md-8">
                                     <label for="first_name">Titre de l'improvisation</label>
                                     <input type="text" class="form-control" name="" id="theme" placeholder="Thème de l'impro">
                                 </div>
-                                <div class="form-group col-md-12">
+                                <div class="form-group col-md-4">
                                     <label for="first_name">Catégorie</label>
                                     <input type="text" class="form-control" name="" id="categorie" placeholder="Improvisation libre">
                                 </div>
@@ -115,16 +115,12 @@
 
 
                             <fieldset>
-                                <legend><img  src="img/timer.png" height="35px" alt=""> Chronomètre</legend>
+                                <legend><img  src="img/timer.png" height="35px" alt=""> Chronomètres</legend>
 
-                                <div class="form-group col-md-5">
-                                    <select class="form-control" name="" id="partie">
-                                        <option>1<sup>ère</sup> partie</option>
-                                        <option>2<sup>ème</sup> partie</option>
-                                        <option>3<sup>ème</sup> partie</option>
-                                    </select>
+                                <div class="row">
 
-                                    
+                                <div class="form-group col-md-4">
+                                <label>Période : </label>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="country">Durée : </label>
@@ -132,9 +128,50 @@
                                     <span class="blinking">:</span>
                                     <input type="number" id="partie_duree_s" value="00" min="0" max="59" step="5" onchange="if(this.value.length===1)this.value='0'+this.value;">
                                 </div>
-                                <div class="form-group col-md-3">
-                                    <label for="country">Caucus : </label>
-                                    <input type="number" id="caucus_duree" value="20" min="0" max="59" step="5" onchange="if(this.value.length===1)this.value='0'+this.value;">
+
+                                <div class="col-md-4">
+                                    <button type="button" class="btn btn-warning" id="match">
+                                        Lancer période
+                                    </button>
+                                </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                    <label>Impro : </label>
+                                    </div>
+                                <div class="form-group col-md-4">
+                                    <label for="country">Durée : </label>
+                                    <input type="number" id="partie_duree_m" value="05" min="0" max="99" onchange="if(this.value.length===1)this.value='0'+this.value;">
+                                    <span class="blinking">:</span>
+                                    <input type="number" id="partie_duree_s" value="00" min="0" max="59" step="5" onchange="if(this.value.length===1)this.value='0'+this.value;">
+                                </div>
+
+                                    <div class="col-md-3">
+                                        <button type="button" class="btn btn-success" id="impro">
+                                            Lancer impro
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                <div class="form-group col-md-4">
+                                <label>Caucus : </label>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="country">Durée : </label>
+                                    <input type="number" id="partie_duree_m" value="00" min="0" max="99" onchange="if(this.value.length===1)this.value='0'+this.value;">
+                                    <span class="blinking">:</span>
+                                    <input type="number" id="partie_duree_s" value="20" min="0" max="59" step="5" onchange="if(this.value.length===1)this.value='0'+this.value;">
+                                </div>
+
+                                <div class="col-md-4">
+                                    <button type="button" class="btn btn-info" id="caucus">
+                                        Lancer Caucus
+                                    </button>
+                                </div>
                                 </div>
                             </fieldset>
                             <br>
@@ -142,21 +179,6 @@
                                 <div class="col-md-3">
                                     <button type="submit" class="btn btn-primary" id="actualiser">
                                         Actualiser
-                                    </button>
-                                </div>
-                                <div class="col-md-3">
-                                    <button type="button" class="btn btn-info" id="caucus">
-                                        Caucus
-                                    </button>
-                                </div>
-                                <div class="col-md-3">
-                                    <button type="button" class="btn btn-success" id="impro">
-                                        Début de l'impro
-                                    </button>
-                                </div>
-                                <div class="col-md-3">
-                                    <button type="button" class="btn btn-warning" id="match">
-                                        Début du match
                                     </button>
                                 </div>
                             </div>
@@ -236,7 +258,7 @@
                 }
 
             }else
-                document.getElementById("impro").innerHTML = "Début de l'impro";
+                document.getElementById("impro").innerHTML = "Lancer impro";
 
         });
 
@@ -246,11 +268,11 @@
             if (document.getElementById("match").innerHTML !== "pause")
                 document.getElementById("match").innerHTML = "pause";
             else{
-                document.getElementById("match").innerHTML = "Début du match";
+                document.getElementById("match").innerHTML = "Lancer période";
 
                 if (document.getElementById("impro").innerHTML === "pause"){
                     ipcRenderer.send('impro:start');
-                    document.getElementById("impro").innerHTML = "Début de l'impro";
+                    document.getElementById("impro").innerHTML = "Lancer impro";
                 }
 
             }
@@ -261,9 +283,9 @@
             ipcRenderer.send('caucus:start');
 
             if (document.getElementById("caucus").innerHTML !== "pause")
-                document.getElementById("match").innerHTML = "pause";
+                document.getElementById("caucus").innerHTML = "pause";
             else
-                document.getElementById("match").innerHTML = "caucus";
+                document.getElementById("caucus").innerHTML = "Lancer Caucus";
 
         });
 
