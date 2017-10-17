@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Control pannel</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/form.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+   <body>
+
+        <div class="container">
+                <div class="row">
+
+                    <div class="col-md-8 col-md-offset-2">
+                        <form role="form" method="POST" action="#">
+
+                            <fieldset>
+                                <legend><img  src="img/team.png" height="35px" alt=""> Équipes</legend>
+
+                                <div class="form-group col-md-5">
+                                    <label for="first_name">Nom de l'équipe</label>
+                                    <input type="text" class="form-control" name="" id="name1" placeholder="Équipe 1">
+                                </div>
+
+                                <div class="form-group col-md-1">
+                                    <label for="">Logo</label>
+                                    <a href=#><img  src="img/upload.png" alt=""></a>
+                                </div>
+
+                                <div class="form-group col-md-5">
+                                    <label>Nom de l'équipe</label>
+                                    <input type="text" class="form-control" name="" id="name2" placeholder="Équipe 2">
+                                </div>
+
+                                <div class="form-group col-md-1">
+                                    <label>Logo</label>
+                                    <a href=#><img  src="img/upload.png" alt=""></a>
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label class="score" for="score">Score : </label>
+                                    <input class="score" type="number" id="score1" value="0" min="0" max="20"> 
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label>Fautes : </label>
+                                    <input  type="number" id="fautes1" value="0" min="0" max="3"> 
+                                </div>
+
+
+                                <div class="form-group col-md-3">
+                                    <label class="score"  for="score">Score : </label>
+                                    <input class="score" type="number" id="score2" value="0" min="0" max="20"> 
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label >Fautes : </label>
+                                    <input  type="number" id="fautes2" value="0" min="0" max="3"> 
+                                </div>
+
+                            </fieldset>
+
+                            <fieldset>
+                                <legend><img  src="img/carton.png" height="35px" alt=""> Carton de thème</legend>
+
+                                <div class="form-group col-md-12">
+                                    <label for="first_name">Titre de l'improvisation</label>
+                                    <input type="text" class="form-control" name="" id="theme" placeholder="Thème de l'impro">
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="first_name">Catégorie</label>
+                                    <input type="text" class="form-control" name="" id="categorie" placeholder="Improvisation libre">
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label for="country">Type</label>
+                                    <select class="form-control" name="" id="mixte">
+                                        <option>Mixte</option>
+                                        <option>Comparée</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="country">Nombre de joueurs</label>
+                                    <select class="form-control" name="" id="nb_joueurs">
+                                        <option>Illimité</option>
+                                        <option>1 joueur / équipe</option>
+                                        <option>2 joueurs / équipe</option>
+                                        <option>3 joueurs / équipe</option>
+                                        <option>Tous les joueurs</option>
+                                        <option>Autre</option>
+                                    </select>
+                                </div>
+
+
+                                <div class="form-group col-md-4">
+                                    <br>
+                                    <label for="country">Durée : </label>
+                                    <input class="score" type="number" id="duree_m" value="05" min="0" max="20" onchange="if(this.value.length===1)this.value='0'+this.value;">
+                                    <span class="blinking">:</span>
+                                    <input class="score" type="number" id="duree_s" value="00" min="0" max="59" step="5" onchange="if(this.value.length===1)this.value='0'+this.value;">
+                                </div>
+
+                            </fieldset>
+
+
+                            <fieldset>
+                                <legend><img  src="img/timer.png" height="35px" alt=""> Chronomètre</legend>
+
+                                <div class="form-group col-md-5">
+                                    <select class="form-control" name="" id="partie">
+                                        <option>1<sup>ère</sup> partie</option>
+                                        <option>2<sup>ème</sup> partie</option>
+                                        <option>3<sup>ème</sup> partie</option>
+                                    </select>
+
+                                    
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="country">Durée : </label>
+                                    <input type="number" id="partie_duree_m" value="30" min="0" max="99" onchange="if(this.value.length===1)this.value='0'+this.value;">
+                                    <span class="blinking">:</span>
+                                    <input type="number" id="partie_duree_s" value="00" min="0" max="59" step="5" onchange="if(this.value.length===1)this.value='0'+this.value;">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="country">Caucus : </label>
+                                    <input type="number" id="caucus_duree" value="20" min="0" max="59" step="5" onchange="if(this.value.length===1)this.value='0'+this.value;">
+                                </div>
+                            </fieldset>
+                            <br>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <button type="submit" class="btn btn-primary" id="actualiser">
+                                        Actualiser
+                                    </button>
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-info" id="caucus">
+                                        Caucus
+                                    </button>
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-success" id="impro">
+                                        Début de l'impro
+                                    </button>
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-warning" id="match">
+                                        Début du match
+                                    </button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/freelancer.min.js"></script>
+
+    <script>
+        const electron = require('electron');
+        const {ipcRenderer} = electron;
+
+        const form = document.querySelector('form');
+        form.addEventListener('submit',submitForm);
+
+        function submitForm(e){
+            e.preventDefault();
+            const array = {};
+
+            if(document.querySelector('#fautes1').value == 3){
+                document.querySelector('#score2').value = parseInt(document.querySelector('#score2').value)+1;
+                document.querySelector('#fautes1').value = 0;
+            }
+            if(document.querySelector('#fautes2').value == 3){
+                document.querySelector('#score1').value = parseInt(document.querySelector('#score1').value)+1;
+                document.querySelector('#fautes2').value = 0;
+            }
+            array.fautes1 = document.querySelector('#fautes1').value;
+            array.fautes2 = document.querySelector('#fautes2').value;
+
+            array.name1 = document.querySelector('#name1').value;
+            array.name2 = document.querySelector('#name2').value;
+            array.score1 = document.querySelector('#score1').value;
+            array.score2 = document.querySelector('#score2').value;
+            array.theme = document.querySelector('#theme').value;
+            array.categorie = document.querySelector('#categorie').value;
+            array.mixte = document.querySelector('#mixte').value;
+            array.nb_joueurs = document.querySelector('#nb_joueurs').value;
+            array.duree_m = document.querySelector('#duree_m').value;
+            array.duree_s = document.querySelector('#duree_s').value;
+            array.partie_duree_m = document.querySelector('#partie_duree_m').value;
+            array.partie_duree_s = document.querySelector('#partie_duree_s').value;
+            array.partie = document.querySelector('#partie').value;
+
+
+            ipcRenderer.send('info:update', array);
+        }
+
+        document.getElementById("impro").addEventListener("click", function(){
+            ipcRenderer.send('impro:start');
+
+            if (document.getElementById("impro").innerHTML !== "pause"){
+                document.getElementById("impro").innerHTML = "pause";
+
+                if (document.getElementById("match").innerHTML !== "pause"){
+                    document.getElementById("match").innerHTML = "pause";
+                    ipcRenderer.send('match:start');
+                }
+
+            }else
+                document.getElementById("impro").innerHTML = "Début de l'impro";
+
+        });
+
+        document.getElementById("match").addEventListener("click", function(){
+            ipcRenderer.send('match:start');
+
+            if (document.getElementById("match").innerHTML !== "pause")
+                document.getElementById("match").innerHTML = "pause";
+            else{
+                document.getElementById("match").innerHTML = "Début du match";
+
+                if (document.getElementById("impro").innerHTML === "pause"){
+                    ipcRenderer.send('impro:start');
+                    document.getElementById("impro").innerHTML = "Début de l'impro";
+                }
+
+            }
+
+        });
+
+        document.getElementById("caucus").addEventListener("click", function(){
+            ipcRenderer.send('caucus:start');
+
+            if (document.getElementById("caucus").innerHTML !== "pause")
+                document.getElementById("match").innerHTML = "pause";
+            else
+                document.getElementById("match").innerHTML = "caucus";
+
+        });
+
+
+    </script>
+
+  </body>
+
+</html>

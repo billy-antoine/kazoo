@@ -4,6 +4,7 @@ const app = electron.app
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
 const Menu = electron.Menu
+const ipcMain = electron.ipcMain;
 
 const path = require('path')
 const url = require('url')
@@ -38,11 +39,11 @@ function createWindow () {
 
 function createSettingWindow () {
   // Create the browser window.
-  settingWindow = new BrowserWindow({width: 800, height: 600, icon:__dirname+"/img/icon.png"})
+  settingWindow = new BrowserWindow({width: 1000, height: 700, icon:__dirname+"/img/icon.png"})
 
   // and load the index.html of the app.
   settingWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'settings.html'),
+    pathname: path.join(__dirname, 'control.html'),
     protocol: 'file:',
     slashes: true
   }))
@@ -86,6 +87,22 @@ app.on('activate', function () {
     createWindow()
   }
 })
+
+ipcMain.on('info:update',function(e,array){
+  mainWindow.webContents.send('info:update', array);
+});
+
+ipcMain.on('impro:start',function(e){
+  mainWindow.webContents.send('impro:start');
+});
+
+ipcMain.on('match:start',function(e){
+  mainWindow.webContents.send('match:start');
+});
+
+ipcMain.on('caucus:start',function(e){
+  mainWindow.webContents.send('caucus:start');
+});
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.

@@ -26,12 +26,12 @@
   <body id="page-top">
 
     <!-- Portfolio Grid Section -->
-        <p class="text-center">2<sup>ème</sup> partie &mdash; 17<span class="blinking">:</span>21</p>
+        <p class="text-center"> <span id="partie">1ère partie</span> &mdash; <span id="partie_duree_m">30</span><span class="blinking">:</span><span id="partie_duree_s">00</span></p>
 
         <br>
       <div class="container">
-        <h2 class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</h2>
-        <p class="text-center">improvisation libre</p>
+        <h2 class="text-center" id="theme">Titre de l'impro</h2>
+        <p class="text-center" id="categorie">improvisation libre</p>
         <hr class="star-primary">
         <div class="well text-center">
           <div class="row">
@@ -39,9 +39,9 @@
                 <a href=#><img  src="img/lubrik.jpg" alt="" width="100%"></a>
             </div>
             <div class="col-md-4">
-                <p class="text-center">mixte &bull; illimité &bull; 6'</p>
-                <h1 class="time"> 04<span class="blinking">:</span>30</h1>
-                <p class="score"> 3 - 4 </p>
+                <p class="text-center" id="type"><span id="mixte">mixte</span> &bull; <span id="nb_joueurs">illimité</span> &bull; <span id="duree_m">6</span>'<span id="duree_s"></span>''</p>
+                <h1 class="time"> <span id="big_duree_m">04</span><span class="blinking">:</span><span id="big_duree_s">00</span></h1>
+                <p class="score"> <span id="score1">0</span> - <span id="score2">0</span> </p>
             </div>
             <div class="col-md-4">
                 <a href=#><img  src="img/jptc.jpg" alt="" width="100%"></a>
@@ -50,24 +50,21 @@
 
           <div class="row">
             <div class="col-md-4">
-               <h4 class="text-center">La Lubrik</h4>
+               <h4 class="text-center" id="name1">La Lubrik</h4>
             </div>
             <div class="col-md-4">
             </div>
             <div class="col-md-4">
-               <h4 class="text-center">J'ai Pas Tout Compris</h4>
+               <h4 class="text-center" id="name2">J'ai Pas Tout Compris</h4>
             </div>
           </div> <!-- row -->
 
           <div class="row">
-            <div class="col-md-4">
-                <a href=#><img  src="img/kazoo.png" alt="" width="15%"></a>
+            <div class="col-md-4" id="fautes1">
             </div>
             <div class="col-md-4">
             </div>
-            <div class="col-md-4">
-                <a href=#><img  src="img/kazoo.png" alt="" width="15%"></a>
-                <a href=#><img  src="img/kazoo.png" alt="" width="15%"></a>
+            <div class="col-md-4" id="fautes2">
             </div>
 
         </div>
@@ -89,6 +86,117 @@
 
     <!-- Custom scripts for this template -->
     <script src="js/freelancer.min.js"></script>
+
+    <script>
+        const electron = require('electron');
+        const {ipcRenderer} = electron;
+        var x=0;
+        var y=0;
+        var impro_pause=true;
+        var match_pause=true;
+
+        ipcRenderer.on('info:update', function(e, array){            
+            document.getElementById("name1").innerHTML = array.name1;
+            document.getElementById("name2").innerHTML = array.name2;
+            document.getElementById("theme").innerHTML = array.theme;
+            document.getElementById("categorie").innerHTML = array.categorie;
+            document.getElementById("mixte").innerHTML = array.mixte;
+            document.getElementById("nb_joueurs").innerHTML = array.nb_joueurs;
+            document.getElementById("score1").innerHTML = array.score1;
+            document.getElementById("score2").innerHTML = array.score2;
+            document.getElementById("duree_m").innerHTML = array.duree_m;
+            document.getElementById("duree_s").innerHTML = array.duree_s;
+            document.getElementById("big_duree_m").innerHTML = array.duree_m;
+            document.getElementById("big_duree_s").innerHTML = array.duree_s;
+            document.getElementById("partie_duree_m").innerHTML = array.partie_duree_m;
+            document.getElementById("partie_duree_s").innerHTML = array.partie_duree_s;
+            document.getElementById("partie").innerHTML = array.partie;
+
+            document.getElementById("fautes1").innerHTML = '';
+            for (var i = 0; i < array.fautes1; i++) {              
+                document.getElementById("fautes1").innerHTML += ('<img  src="img/kazoo.png" alt="" width="15%">');  
+            };
+            document.getElementById("fautes2").innerHTML = '';
+            for (var i = 0; i < array.fautes2; i++) {              
+                document.getElementById("fautes2").innerHTML += ('<img  src="img/kazoo.png" alt="" width="15%">');  
+            };
+
+
+        });
+
+        ipcRenderer.on('impro:start', function(){
+                clearInterval(x);
+                if(impro_pause){
+                    impro_pause = false;
+                    x = setInterval(function() {
+                        var t = parseInt(document.getElementById("big_duree_s").innerHTML);
+                        var m = parseInt(document.getElementById("big_duree_m").innerHTML);
+
+                        if(t == 0){
+                            if(m == 0){
+                                clearInterval(x);
+                                t = 1;
+                            }else{
+                                t = 60;
+                                m = m-1;
+                            }
+                        }
+
+                        document.getElementById("big_duree_s").innerHTML = t-1;
+                        document.getElementById("big_duree_m").innerHTML = m;
+
+                        if(t < 11){                    
+                            document.getElementById("big_duree_s").innerHTML = '0' + (t-1);
+                        }
+                        if(m < 11){                    
+                            document.getElementById("big_duree_m").innerHTML = '0' + m;
+                        }            
+
+                },1000);
+            } else{
+                impro_pause=true;
+            }
+        });
+
+        ipcRenderer.on('match:start', function(){
+                clearInterval(y);
+                if(match_pause){
+                    match_pause = false;
+                    y = setInterval(function() {
+                        var t = parseInt(document.getElementById("partie_duree_s").innerHTML);
+                        var m = parseInt(document.getElementById("partie_duree_m").innerHTML);
+
+                        if(t == 0){
+                            if(m == 0){
+                                clearInterval(y);
+                                t = 1;
+                            }else{
+                                t = 60;
+                                m = m-1;
+                            }
+                        }
+
+                        document.getElementById("partie_duree_s").innerHTML = t-1;
+                        document.getElementById("partie_duree_m").innerHTML = m;
+
+                        if(t < 11){                    
+                            document.getElementById("partie_duree_s").innerHTML = '0' + (t-1);
+                        }
+                        if(m < 11){                    
+                            document.getElementById("partie_duree_m").innerHTML = '0' + m;
+                        }            
+
+                },1000);
+            } else{
+                match_pause=true;
+            }
+        });
+
+        ipcRenderer.on('caucus:start', function(){
+            
+        });
+
+    </script>
 
   </body>
 
